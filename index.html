@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TwinFlow Portal</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        h1 {
+            font-weight: 200;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+        .container {
+            display: flex;
+            gap: 2rem;
+        }
+        button {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 1.5rem 2.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.1s ease, background-color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            min-width: 250px;
+        }
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <h1>TwinFlow Portal</h1>
+    <div class="container">
+        <button onclick="window.open('desk.html', '_blank')">启动主屏：The Desk</button>
+        <button onclick="window.open('realm.html', '_blank')">启动副屏：The Realm</button>
+    </div>
+</body>
+</html>
