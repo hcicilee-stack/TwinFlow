@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Editor from './components/Editor/Editor';
-import { FontSwitcher } from './components/UI/FontSwitcher';
-import { Nexus } from './components/UI/Nexus';
+import { ScenePanel } from './components/UI/ScenePanel';
 
 type Mode = 'rainy' | 'snowy';
 
@@ -96,18 +95,12 @@ export default function App() {
         accept="image/*"
       />
 
-      {/* UI Overlay Layer - Left */}
-      <FontSwitcher
+      {/* UI Overlay Layer - Left Panel */}
+      <ScenePanel
         currentFont={fontFamily}
         onFontChange={setFontFamily}
         currentSize={fontSize}
         onSizeChange={setFontSize}
-      />
-
-      {/* UI Overlay Layer - Right */}
-      <Nexus 
-        volume={currentVolume}
-        onVolumeChange={handleVolumeChange}
         onUploadClick={() => fileInputRef.current?.click()}
       />
 
