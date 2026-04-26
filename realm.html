@@ -50,10 +50,6 @@
 </head>
 <body>
     <div id="canvas-container">
-        <div id="ui-layer">
-            <div class="label">Vibe Sync</div>
-            <div id="counter">0</div>
-        </div>
     </div>
 
     <script>
@@ -63,7 +59,6 @@
          */
 
         // 1. Broadcast Listeners
-        const counterDisplay = document.getElementById('counter');
         const vibeChannel = new BroadcastChannel('twinflow_vibe');
         let currentVibe = 0;
         let lastInputTime = 0;
@@ -74,7 +69,6 @@
         const handleUpdate = (data, source) => {
             console.log(`B-Screen Received (${source}):`, data);
             currentVibe = data;
-            counterDisplay.textContent = currentVibe;
             lastInputTime = Date.now();
             targetSpeed = 1.0; // Wake up immediately
         };
@@ -115,7 +109,6 @@
             // Background with slight fading and blur to create the "liquid" trail effect
             background(0, 9);
             filter(BLUR);
-            stroke(255);
 
             /* ---- Particle Creation ---- */
             // Adjust spawn rate based on speed to prevent stacking
@@ -130,11 +123,18 @@
                 // x-position drifts horizontally
                 let px = (time * 99) % width;
 
+                // Probabilistic color assignment
+                let r = random();
+                let pc = "#AEEFFF";
+                if (r > 0.6 && r <= 0.9) pc = "#2D374880";
+                else if (r > 0.9) pc = "#F0FDFF";
+
                 particles[index] = {
                     x: px,
                     y: 0,
                     g: 0, // vertical acceleration
-                    s: 3  // initial size
+                    s: random(2, 6),  // initial size (Depth Logic)
+                    color: pc
                 };
                 time++;
             }
@@ -146,6 +146,7 @@
 
                 // Slowly shrink the droplet - scaled by speed to maintain visual path length
                 p.s *= (1 - 0.003 * currentSpeedMult);
+                stroke(p.color);
                 strokeWeight(p.s);
 
                 // Perlin noise guides the "staircase" motion
