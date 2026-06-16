@@ -11,19 +11,18 @@
             padding: 0;
             background-color: black;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 100vw;
             height: 100vh;
         }
         #canvas-container {
             position: relative;
-            width: 600px;
-            height: 800px;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.03);
+            width: 100%;
+            height: 100%;
         }
         canvas {
             display: block;
+            width: 100% !important;
+            height: 100% !important;
         }
         #ui-layer {
             position: absolute;
@@ -93,7 +92,10 @@
         const MAX_PARTICLES = 6000; 
 
         function setup() {
-            const canvas = createCanvas(600, 800);
+            const container = document.getElementById('canvas-container');
+            const w = container.clientWidth || window.innerWidth;
+            const h = container.clientHeight || window.innerHeight;
+            const canvas = createCanvas(w, h);
             canvas.parent('canvas-container');
             background(0);
             lastInputTime = Date.now(); // Initialize
@@ -179,7 +181,13 @@
             }
         }
 
-        // windowResized removed to maintain fixed 600x800 size
+        function windowResized() {
+            const container = document.getElementById('canvas-container');
+            const w = container.clientWidth || window.innerWidth;
+            const h = container.clientHeight || window.innerHeight;
+            resizeCanvas(w, h);
+            background(0); // clear screen to let it rebuild dynamically on new grid
+        }
     </script>
 </body>
 </html>
